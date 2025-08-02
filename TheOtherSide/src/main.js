@@ -1,11 +1,31 @@
 import kaplay from "kaplay";
-// import "kaplay/global"; // uncomment if you want to use without the k. prefix
+import "kaplay/global"; // uncomment if you want to use without the k. prefix
 
-const k = kaplay();
+const k = kaplay({});
+loadRoot("./"); // A good idea for Itch.io publishing later
+loadSprite("bean", "sprites/bean.png");
+import { registerLevel1 } from "./level1";
 
-k.loadRoot("./"); // A good idea for Itch.io publishing later
-k.loadSprite("bean", "sprites/bean.png");
 
-k.add([k.pos(120, 80), k.sprite("bean")]);
+scene("mainmenu", () => {
+    const title = add([
+        text("The Other Side"),
+        anchor("center"),
+        pos(center()),
+        
 
-k.onClick(() => k.addKaboom(k.mousePos()));
+    ])
+    const button = add([
+        rect(150, 40),
+        anchor("center"),
+        pos(width()/2, height()/2 + 100)
+    ])
+    //cause why tf does this work lmao
+    button.onMousePress(() => {
+        registerLevel1();
+        go("level1");
+    });
+});
+
+
+go("mainmenu");
