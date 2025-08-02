@@ -4,16 +4,22 @@ import "kaplay/global"; // uncomment if you want to use without the k. prefix
 const k = kaplay({});
 loadRoot("./"); // A good idea for Itch.io publishing later
 loadSprite("bean", "sprites/bean.png");
+loadFont("gfont", "fonts/gfont.otf");
+
+const myfont = "gfont"
+
 import { registerLevel1 } from "./level1";
 
+const black = color(0,0,0);
 
 scene("mainmenu", () => {
     const title = add([
-        text("The Other Side"),
+        text("The Other Side",{
+            size: 85,
+            font: myfont
+        }),
         anchor("center"),
-        pos(center()),
-        
-
+        pos((width()/2),(height()/2) - 60),
     ])
     const button = add([
         rect(150, 40),
@@ -21,6 +27,16 @@ scene("mainmenu", () => {
         area(),
         pos(width()/2, height()/2 + 100),
         "play"
+    ])
+
+    button.add([
+        text("Start Game", {
+            size: 20,
+            font: myfont
+        }),
+        anchor("center"),
+        area(),
+        black,
     ])
     //cause why tf does this work lmao
     onClick("play", () => {
