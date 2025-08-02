@@ -18,10 +18,12 @@ scene("mainmenu", () => {
     const button = add([
         rect(150, 40),
         anchor("center"),
-        pos(width()/2, height()/2 + 100)
+        area(),
+        pos(width()/2, height()/2 + 100),
+        "play"
     ])
     //cause why tf does this work lmao
-    button.onMousePress(() => {
+    onClick("play", () => {
         registerLevel1();
         go("level1");
     });
